@@ -1,54 +1,88 @@
-# React + TypeScript + Vite
+# Workflow Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Overview
 
-Currently, two official plugins are available:
+A powerful, intuitive workflow management application built with React that allows users to create, edit, execute, and monitor custom workflows. Create visual flowcharts connecting various action steps including API calls and email notifications with an elegant drag-and-drop interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+### Authentication
+- Secure user login with email and password
+- Session management
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Workflow Dashboard
+- Comprehensive list view of all workflows
+- Status indicators (passed/failed) for quick assessment
+- Powerful search functionality by name or workflow ID
+- One-click workflow execution with confirmation
+- Easy access to edit existing workflows
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Visual Workflow Builder
+- Intuitive flowchart-based workflow creation
+- Logical sequence connection between steps
+- Interactive canvas with zoom and pan capabilities
+- Real-time workflow visualization
+- Autosave and manual save options
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React.js
+- **State Management**: Zustand
+- **Workflow Visualization**: React Flow
+- **Data Storage**: Firebase
+- **Styling**: CSS/SCSS with responsive design
+- **Deployment**: Vercel
+
+## 🔧 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/vaibhxv/workflow-manager.git
+
+# Navigate to project directory
+cd workflow-manager
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🖥️ Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Creating a Workflow
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+1. Log in to your account
+2. Navigate to the Workflow List and click "Create New Workflow"
+3. Add a starting point to your workflow
+4. Drag and drop action nodes onto the canvas
+5. Connect nodes to establish the workflow sequence
+6. Configure each node with necessary parameters
+7. Save your workflow
+
+### Executing a Workflow
+
+1. From the Workflow List, find your workflow
+2. Click the "Execute" button
+3. Confirm execution in the modal prompt
+4. View real-time execution results
+
+### Example Workflow
+
+Create a workflow that:
+1. Makes an API call to fetch data
+2. Processes the response
+3. Sends the processed data via email
+
+## 📊 Demo
+
+Visit our [live demo](workflow-manager-inky.vercel.app) to try the system.
+
+## 🔄 Development Process
+
+This application was developed as part of a Front-End Software Engineer assessment with a focus on:
+- Clean, maintainable React code structure
+- Intuitive UI/UX implementation
+- Effective data management
+- Responsive design principles

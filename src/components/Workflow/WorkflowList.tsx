@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Star, MoreVertical, ChevronDown, Menu, X, Building2, User, LogOut } from 'lucide-react';
 import { useWorkflows, initWorkflowsListener } from '../../hooks/useWorkflows';
 import { useAuth } from '../../hooks/useAuth';
 import { Workflow } from '../../types/workflow';
-import React from 'react';
+import DeleteConfirmationModal from '../Modals/DeleteConfirmationModal';
 
 export default function WorkflowList() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,6 +13,8 @@ export default function WorkflowList() {
   const { workflows, loading, error, fetchWorkflows, deleteWorkflow } = useWorkflows();
   const { user, logout } = useAuth();
   const [expandedWorkflowId, setExpandedWorkflowId] = useState<string | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [workflowToDelete, setWorkflowToDelete] = useState<Workflow | null>(null);
   
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,10 +59,17 @@ export default function WorkflowList() {
     navigate('/login');
   };
 
-  const handleDeleteWorkflow = (id: string, e: React.MouseEvent) => {
+  const handleDeleteWorkflow = (workflow: React.SetStateAction<Workflow | null>, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (window.confirm('Are you sure you want to delete this workflow?')) {
-      deleteWorkflow(id);
+    setWorkflowToDelete(workflow);
+    setIsDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (workflowToDelete) {
+      deleteWorkflow(workflowToDelete.id);
+      setIsDeleteModalOpen(false);
+      setWorkflowToDelete(null);
     }
   };
 
@@ -346,7 +355,7 @@ export default function WorkflowList() {
                         </td>
                         <td className="p-1 text-center">
                           <button 
-                            onClick={(e) => handleDeleteWorkflow(workflow.id, e)}
+                            onClick={(e) => handleDeleteWorkflow(workflow, e)}
                             className="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200"
                           >
                             Delete
@@ -493,6 +502,14 @@ export default function WorkflowList() {
           onClick={() => setSidebarOpen(false)}
         ></div>
       )}
+        <DeleteConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={confirmDelete}
+        itemName={workflowToDelete?.name || 'Unnamed Workflow'}
+        />
+        
+
     </div>
   );
 }
